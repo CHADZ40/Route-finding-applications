@@ -1,8 +1,8 @@
 """
-Member 3 - A* algorithm and performance comparison
+Kheang - A* algorithm and performance comparison
 ==================================================
 
-Owner: Member 3
+Owner: Kheang
 
 Responsibilities
 ----------------

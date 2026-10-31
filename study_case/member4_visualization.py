@@ -1,8 +1,8 @@
 """
-Member 4 - Visualization and user interface
+Noreak - Visualization and user interface
 ===========================================
 
-Owner: Member 4
+Owner: Noreak
 
 Responsibilities
 ----------------

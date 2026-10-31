@@ -4,12 +4,12 @@ Route Finder - Demonstration
 
 Brings every team member's work together:
 
-    1. Map loading (Graph)               - Member 1
-    2. Dijkstra's shortest path          - Member 2
-    3. A* and performance comparison     - Member 3
-    4. Road blocking and traffic         - Member 5
-    5. Graphs / visualization            - Member 4
-    6. Interactive prototype (CLI)       - Member 4 + everyone
+    1. Map loading (Graph)               - Seth
+    2. Dijkstra's shortest path          - Menghour
+    3. A* and performance comparison     - Kheang
+    4. Road blocking and traffic         - Raboth
+    5. Graphs / visualization            - Noreak
+    6. Interactive prototype (CLI)       - Noreak + everyone
 
 Usage (from the project root):
 
@@ -49,7 +49,7 @@ def section(title: str) -> None:
 
 # ----- 1. Graph ------------------------------------------------------------
 def demo_graph(graph: Graph) -> None:
-    section("1. Map loaded as a weighted graph (adjacency list)  - Member 1")
+    section("1. Map loaded as a weighted graph (adjacency list)  - Seth")
     print(graph)
     for name in graph.locations:
         roads = ", ".join(f"{n} ({w:g} km)" for n, w in graph.neighbors(name).items())
@@ -58,7 +58,7 @@ def demo_graph(graph: Graph) -> None:
 
 # ----- 2. Dijkstra ---------------------------------------------------------
 def demo_dijkstra(graph: Graph) -> PathResult:
-    section("2. Dijkstra's algorithm with a min-heap  - Member 2")
+    section("2. Dijkstra's algorithm with a min-heap  - Menghour")
     result = dijkstra(graph, START, GOAL)
     print(format_route(result))
     print(f"\n  Distance from {START} to every location:")
@@ -69,7 +69,7 @@ def demo_dijkstra(graph: Graph) -> PathResult:
 
 # ----- 3. A* + performance -------------------------------------------------
 def demo_astar(graph: Graph, dijkstra_result: PathResult) -> tuple[PathResult, list[ComparisonRow]]:
-    section("3. A* search and performance comparison  - Member 3")
+    section("3. A* search and performance comparison  - Kheang")
     result = astar(graph, START, GOAL)
     print(format_route(result))
     same = abs(result.distance - dijkstra_result.distance) < 1e-9
@@ -88,7 +88,7 @@ def demo_astar(graph: Graph, dijkstra_result: PathResult) -> tuple[PathResult, l
 
 # ----- 4. Road blocking ----------------------------------------------------
 def demo_road_blocking(graph: Graph, original: PathResult) -> tuple[list[tuple[str, str]], PathResult]:
-    section("4. Road blocking and traffic  - Member 5")
+    section("4. Road blocking and traffic  - Raboth")
     # Close the middle road of the current best route to force a detour.
     edges = list(zip(original.path, original.path[1:]))
     blocked = [edges[len(edges) // 2]]
@@ -110,7 +110,7 @@ def demo_road_blocking(graph: Graph, original: PathResult) -> tuple[list[tuple[s
 # ----- 5. Visualization ----------------------------------------------------
 def demo_visualization(graph: Graph, route: PathResult, blocked: list[tuple[str, str]],
                        detour: PathResult, rows: list[ComparisonRow], show: bool) -> None:
-    section("5. Visualization with networkx + matplotlib  - Member 4")
+    section("5. Visualization with networkx + matplotlib  - Noreak")
     if not HAS_PLOTTING:
         print("  Skipped: install the plotting libraries with  pip install -r requirements.txt")
         return

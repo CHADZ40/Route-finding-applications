@@ -1,4 +1,4 @@
-"""Tests for Member 2 - Dijkstra's algorithm."""
+"""Tests for Menghour - Dijkstra's algorithm."""
 
 import math
 import unittest

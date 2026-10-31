@@ -1,8 +1,8 @@
 """
-Member 1 - Graph class and data loading
+Seth - Graph class and data loading
 =======================================
 
-Owner: Member 1
+Owner: Seth
 
 Responsibilities
 ----------------

@@ -1,8 +1,8 @@
 """
-Member 2 - Dijkstra's algorithm
+Menghour - Dijkstra's algorithm
 ===============================
 
-Owner: Member 2
+Owner: Menghour
 
 Responsibilities
 ----------------
