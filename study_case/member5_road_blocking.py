@@ -1,8 +1,8 @@
 """
-Member 5 - Road blocking and traffic simulation
+Raboth - Road blocking and traffic simulation
 ===============================================
 
-Owner: Member 5
+Owner: Raboth
 
 Responsibilities
 ----------------
@@ -16,7 +16,7 @@ Tests live in ``test_case/test_member5_road_blocking.py``.
 
 CHALLENGE
 ---------
-Needs Member 1's Graph (remove_road / add_road / copy) and Member 2's
+Needs Seth's Graph (remove_road / add_road / copy) and Menghour's
 Dijkstra. You are done when this passes:
 
     python -m unittest test_case.test_member5_road_blocking -v

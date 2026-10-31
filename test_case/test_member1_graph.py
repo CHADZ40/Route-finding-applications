@@ -1,4 +1,4 @@
-"""Tests for Member 1 - Graph class and data loading."""
+"""Tests for Seth - Graph class and data loading."""
 
 import json
 import tempfile

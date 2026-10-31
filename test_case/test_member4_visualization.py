@@ -1,4 +1,4 @@
-"""Tests for Member 4 - Visualization and user interface."""
+"""Tests for Noreak - Visualization and user interface."""
 
 import importlib.util
 import tempfile

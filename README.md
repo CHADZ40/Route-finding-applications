@@ -84,7 +84,7 @@ hints are given, and every body is a list of `TODO` hints ending in
 test file passes. Until everyone is finished, `python3 -m unittest` shows errors
 for the unfinished parts. That is expected.
 
-Order: Member 1 (`Graph`) first → Member 2 (Dijkstra) → Members 3, 4, 5.
+Order: Seth (`Graph`) first → Menghour (Dijkstra) → Kheang, Noreak, Raboth.
 
 ## Team Workflow
 1. Work only in your own file in `study_case/` and your own test file in `test_case/`.
@@ -96,11 +96,11 @@ Order: Member 1 (`Graph`) first → Member 2 (Dijkstra) → Members 3, 4, 5.
 ## Team
 | Member | Task | Study case | Test case |
 |---|---|---|---|
-| Member 1 | Graph class and data loading | `member1_graph.py` | `test_member1_graph.py` |
-| Member 2 | Dijkstra's algorithm | `member2_dijkstra.py` | `test_member2_dijkstra.py` |
-| Member 3 | A* and performance comparison | `member3_astar.py` | `test_member3_astar.py` |
-| Member 4 | Visualization and user interface | `member4_visualization.py` | `test_member4_visualization.py` |
-| Member 5 | Road blocking and traffic simulation | `member5_road_blocking.py` | `test_member5_road_blocking.py` |
+| Seth | Graph class and data loading | `member1_graph.py` | `test_member1_graph.py` |
+| Menghour | Dijkstra's algorithm | `member2_dijkstra.py` | `test_member2_dijkstra.py` |
+| Kheang | A* and performance comparison | `member3_astar.py` | `test_member3_astar.py` |
+| Noreak | Visualization and user interface | `member4_visualization.py` | `test_member4_visualization.py` |
+| Raboth | Road blocking and traffic simulation | `member5_road_blocking.py` | `test_member5_road_blocking.py` |
 
 ## Course
 Computer Science B: Data Structures and Advanced Python

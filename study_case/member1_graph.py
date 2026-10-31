@@ -1,8 +1,8 @@
 """
-Member 1 - Graph class and data loading
+Seth - Graph class and data loading
 =======================================
 
-Owner: Member 1
+Owner: Seth
 
 Responsibilities
 ----------------
@@ -87,7 +87,7 @@ class Graph:
         # TODO 1: no road from a to b -> raise KeyError
         # TODO 2: pop b out of self._adj[a] and keep the weight
         # TODO 3: if NOT directed, also remove a from self._adj[b]
-        # TODO 4: return the weight (Member 5 uses it to put the road back)
+        # TODO 4: return the weight (Raboth uses it to put the road back)
         raise NotImplementedError
 
     def has_road(self, a: str, b: str) -> bool:

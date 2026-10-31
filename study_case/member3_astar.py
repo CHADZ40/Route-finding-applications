@@ -1,8 +1,8 @@
 """
-Member 3 - A* algorithm and performance comparison
+Kheang - A* algorithm and performance comparison
 ==================================================
 
-Owner: Member 3
+Owner: Kheang
 
 Responsibilities
 ----------------
@@ -19,7 +19,7 @@ Tests live in ``test_case/test_member3_astar.py``.
 
 CHALLENGE
 ---------
-A* needs Member 2's Dijkstra working first (the tests compare against it).
+A* needs Menghour's Dijkstra working first (the tests compare against it).
 You are done when this passes:
 
     python -m unittest test_case.test_member3_astar -v

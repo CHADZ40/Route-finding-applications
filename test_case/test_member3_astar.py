@@ -1,4 +1,4 @@
-"""Tests for Member 3 - A* algorithm and performance comparison."""
+"""Tests for Kheang - A* algorithm and performance comparison."""
 
 import math
 import unittest
