@@ -1,0 +1,144 @@
+{
+  "name": "Sample City",
+  "unit": "km",
+  "directed": false,
+  "locations": [
+    {
+      "name": "Home",
+      "x": 0,
+      "y": 0
+    },
+    {
+      "name": "School",
+      "x": 2,
+      "y": 1
+    },
+    {
+      "name": "Library",
+      "x": 4,
+      "y": 0
+    },
+    {
+      "name": "Park",
+      "x": 1,
+      "y": 3
+    },
+    {
+      "name": "Mall",
+      "x": 4,
+      "y": 3
+    },
+    {
+      "name": "Hospital",
+      "x": 6,
+      "y": 2
+    },
+    {
+      "name": "Station",
+      "x": 3,
+      "y": 5
+    },
+    {
+      "name": "Museum",
+      "x": 6,
+      "y": 5
+    },
+    {
+      "name": "Stadium",
+      "x": 8,
+      "y": 4
+    },
+    {
+      "name": "Airport",
+      "x": 9,
+      "y": 1
+    }
+  ],
+  "roads": [
+    {
+      "from": "Home",
+      "to": "School",
+      "distance": 2.7
+    },
+    {
+      "from": "Home",
+      "to": "Park",
+      "distance": 4.2
+    },
+    {
+      "from": "School",
+      "to": "Library",
+      "distance": 3.2
+    },
+    {
+      "from": "School",
+      "to": "Park",
+      "distance": 2.5
+    },
+    {
+      "from": "School",
+      "to": "Mall",
+      "distance": 4.3
+    },
+    {
+      "from": "Library",
+      "to": "Hospital",
+      "distance": 3.4
+    },
+    {
+      "from": "Library",
+      "to": "Airport",
+      "distance": 8.2
+    },
+    {
+      "from": "Park",
+      "to": "Station",
+      "distance": 3.4
+    },
+    {
+      "from": "Park",
+      "to": "Mall",
+      "distance": 3.9
+    },
+    {
+      "from": "Mall",
+      "to": "Hospital",
+      "distance": 2.5
+    },
+    {
+      "from": "Mall",
+      "to": "Station",
+      "distance": 2.7
+    },
+    {
+      "from": "Station",
+      "to": "Museum",
+      "distance": 3.9
+    },
+    {
+      "from": "Museum",
+      "to": "Hospital",
+      "distance": 3.6
+    },
+    {
+      "from": "Museum",
+      "to": "Stadium",
+      "distance": 2.5
+    },
+    {
+      "from": "Hospital",
+      "to": "Stadium",
+      "distance": 3.7
+    },
+    {
+      "from": "Hospital",
+      "to": "Airport",
+      "distance": 3.8
+    },
+    {
+      "from": "Stadium",
+      "to": "Airport",
+      "distance": 3.5
+    }
+  ]
+}
