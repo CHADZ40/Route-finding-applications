@@ -3,6 +3,12 @@
 import math
 import unittest
 
+import sys
+from pathlib import Path
+
+# Lets you run this file directly (e.g. the Run button in VS Code).
+sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
+
 from study_case.member1_graph import Graph, load_sample_graph
 from study_case.member2_dijkstra import dijkstra, reconstruct_path, shortest_distances
 

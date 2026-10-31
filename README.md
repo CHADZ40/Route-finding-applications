@@ -31,7 +31,7 @@ by distance (km).
 
 ```
 Final-project/
-├── study_case/                      # each member builds their own task here
+├── study_case/                      # skeletons: each member fills in their own file
 │   ├── data/sample_map.json         # 10-location "Sample City" map
 │   ├── member1_graph.py             # Graph class and data loading
 │   ├── member2_dijkstra.py          # Dijkstra's algorithm
@@ -53,21 +53,21 @@ Final-project/
 ```
 
 ## Getting Started
-Requires Python 3.10 or newer.
+Requires Python 3.10 or newer. On macOS/Linux use `python3`; on Windows use `python`.
 
     git clone <your-repo-url>
     cd Final-project
-    pip install -r requirements.txt
+    python3 -m pip install -r requirements.txt
 
 Run everything from the project root:
 
-    python demonstration/main.py                 # full demonstration + graphs
-    python demonstration/main.py --no-show       # same, but only save the PNGs
-    python demonstration/main.py --interactive   # interactive route-finder prototype
-    python demonstration/main.py --test          # run every test case
+    python3 demonstration/main.py                 # full demonstration + graphs
+    python3 demonstration/main.py --no-show       # same, but only save the PNGs
+    python3 demonstration/main.py --interactive   # interactive route-finder prototype
+    python3 demonstration/main.py --test          # run every test case
 
-    python -m unittest -v                                    # all tests
-    python -m unittest test_case.test_member2_dijkstra -v    # one member's tests
+    python3 -m unittest -v                                    # all tests
+    python3 -m unittest test_case.test_member2_dijkstra -v    # one member's tests
 
 ## What the Demonstration Shows
 1. The Sample City map printed as an adjacency list
@@ -77,11 +77,20 @@ Run everything from the project root:
 5. Graphs saved to `demonstration/output/`:
    `1_map.png`, `2_shortest_route.png`, `3_blocked_route.png`, `4_performance.png`
 
+## The Challenge
+Each file in `study_case/` is a **skeleton**: function names, docstrings and type
+hints are given, and every body is a list of `TODO` hints ending in
+`raise NotImplementedError`. Replace the hints with real code until your own
+test file passes. Until everyone is finished, `python3 -m unittest` shows errors
+for the unfinished parts. That is expected.
+
+Order: Member 1 (`Graph`) first → Member 2 (Dijkstra) → Members 3, 4, 5.
+
 ## Team Workflow
 1. Work only in your own file in `study_case/` and your own test file in `test_case/`.
 2. Keep the public function names the same — other members and `main.py` import them.
-3. Before pushing, run your tests and the full suite: `python -m unittest -v`.
-4. Run `python demonstration/main.py` to make sure everything still works together.
+3. Before pushing, run your tests and the full suite: `python3 -m unittest -v`.
+4. Run `python3 demonstration/main.py` to make sure everything still works together.
 5. Use a branch per member (e.g. `member2-dijkstra`) and open a pull request into `main`.
 
 ## Team

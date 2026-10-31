@@ -16,6 +16,13 @@ overestimates, i.e. every road is at least as long as the straight line
 between its two ends. The sample map and the grid generator respect this.
 
 Tests live in ``test_case/test_member3_astar.py``.
+
+CHALLENGE
+---------
+A* needs Member 2's Dijkstra working first (the tests compare against it).
+You are done when this passes:
+
+    python -m unittest test_case.test_member3_astar -v
 """
 
 from __future__ import annotations
@@ -36,8 +43,9 @@ T = TypeVar("T")
 
 
 def euclidean_heuristic(graph: Graph, a: str, b: str) -> float:
-    la, lb = graph.location(a), graph.location(b)
-    return math.hypot(la.x - lb.x, la.y - lb.y)
+    # TODO: get both Locations with graph.location(...) and return the
+    #       straight-line distance between them (hint: math.hypot(dx, dy))
+    raise NotImplementedError
 
 
 def zero_heuristic(graph: Graph, a: str, b: str) -> float:
@@ -47,38 +55,30 @@ def zero_heuristic(graph: Graph, a: str, b: str) -> float:
 
 def astar(graph: Graph, start: str, goal: str, heuristic: Heuristic = euclidean_heuristic) -> PathResult:
     check_endpoints(graph, start, goal)
-    g_score: dict[str, float] = {start: 0.0}
-    previous: dict[str, str] = {}
-    closed: set[str] = set()
-    heap: list[tuple[float, float, str]] = [(heuristic(graph, start, goal), 0.0, start)]
-
-    while heap:
-        _, g, node = heapq.heappop(heap)
-        if node in closed:
-            continue
-        closed.add(node)
-        if node == goal:
-            return PathResult(reconstruct_path(previous, start, goal), g, len(closed), "A*")
-        for nbr, weight in graph.neighbors(node).items():
-            new_g = g + weight
-            if new_g < g_score.get(nbr, math.inf):
-                g_score[nbr] = new_g
-                previous[nbr] = node
-                heapq.heappush(heap, (new_g + heuristic(graph, nbr, goal), new_g, nbr))
-
-    return PathResult([], math.inf, len(closed), "A*")
+    # A* = Dijkstra, but the heap is sorted by f = g + h:
+    #   g = real distance from start so far
+    #   h = heuristic(graph, node, goal) = guess of the distance left
+    # TODO 1: g_score = {start: 0.0}, previous = {}, closed = set()
+    #         heap = [(heuristic(graph, start, goal), 0.0, start)]   # (f, g, node)
+    # TODO 2: while heap: f, g, node = heapq.heappop(heap)
+    # TODO 3: skip nodes already in closed, otherwise add node to closed
+    # TODO 4: if node == goal: return PathResult(reconstruct_path(...), g,
+    #                                            len(closed), "A*")
+    # TODO 5: for each neighbor: new_g = g + weight
+    #         if new_g < g_score.get(nbr, math.inf):
+    #             update g_score and previous, then push
+    #             (new_g + heuristic(graph, nbr, goal), new_g, nbr)
+    # TODO 6: heap is empty -> no route: PathResult([], math.inf, len(closed), "A*")
+    raise NotImplementedError
 
 
 def timed(func: Callable[..., T]) -> Callable[..., tuple[T, float]]:
     """Decorator: the wrapped function returns ``(result, elapsed_seconds)``."""
-
-    @functools.wraps(func)
-    def wrapper(*args, **kwargs):
-        start = time.perf_counter()
-        result = func(*args, **kwargs)
-        return result, time.perf_counter() - start
-
-    return wrapper
+    # TODO 1: define wrapper(*args, **kwargs) and put @functools.wraps(func) on it
+    # TODO 2: inside: start = time.perf_counter(), call func, measure the time
+    # TODO 3: wrapper returns (result, elapsed_seconds)
+    # TODO 4: timed returns wrapper
+    raise NotImplementedError
 
 
 @dataclass
@@ -99,17 +99,14 @@ ALGORITHMS: dict[str, Callable[[Graph, str, str], PathResult]] = {
 
 def compare_algorithms(graph: Graph, pairs: Iterable[tuple[str, str]], repeats: int = 5) -> list[ComparisonRow]:
     """Run every algorithm on every ``(start, goal)`` pair and average the time."""
-    rows: list[ComparisonRow] = []
-    for start, goal in pairs:
-        for name, algorithm in ALGORITHMS.items():
-            run = timed(algorithm)
-            total = 0.0
-            for _ in range(repeats):
-                result, elapsed = run(graph, start, goal)
-                total += elapsed
-            rows.append(ComparisonRow(start, goal, name, result.distance, result.nodes_visited,
-                                      total / repeats * 1000))
-    return rows
+    # TODO 1: rows = []
+    # TODO 2: for each (start, goal) in pairs, for each (name, algorithm) in ALGORITHMS:
+    #         run = timed(algorithm)
+    #         call run(graph, start, goal) `repeats` times and add up the seconds
+    # TODO 3: append ComparisonRow(start, goal, name, result.distance,
+    #         result.nodes_visited, average time in MILLISECONDS)
+    # TODO 4: return rows  (order: Dijkstra row, then A* row, for each pair)
+    raise NotImplementedError
 
 
 def generate_grid_graph(rows: int, cols: int, seed: int | None = None, max_detour: float = 1.5) -> Graph:
@@ -118,15 +115,10 @@ def generate_grid_graph(rows: int, cols: int, seed: int | None = None, max_detou
     Each road is 1-``max_detour`` times its straight-line length, so the
     Euclidean heuristic stays admissible.
     """
-    rng = random.Random(seed)
-    graph = Graph()
-    for r in range(rows):
-        for c in range(cols):
-            graph.add_location(f"{r},{c}", c, r)
-    for r in range(rows):
-        for c in range(cols):
-            if c + 1 < cols:
-                graph.add_road(f"{r},{c}", f"{r},{c + 1}", round(rng.uniform(1, max_detour), 3))
-            if r + 1 < rows:
-                graph.add_road(f"{r},{c}", f"{r + 1},{c}", round(rng.uniform(1, max_detour), 3))
-    return graph
+    # TODO 1: rng = random.Random(seed)   (same seed -> same map every time)
+    # TODO 2: add a location named f"{r},{c}" at x=c, y=r for every cell
+    # TODO 3: connect each cell to its right neighbor (c + 1) and the one
+    #         below (r + 1) when they exist, with weight
+    #         round(rng.uniform(1, max_detour), 3)
+    # TODO 4: return the graph
+    raise NotImplementedError

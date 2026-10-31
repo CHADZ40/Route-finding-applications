@@ -15,6 +15,14 @@ Responsibilities
 the text helpers still work when those libraries are not installed.
 
 Tests live in ``test_case/test_member4_visualization.py``.
+
+CHALLENGE
+---------
+Start with ``format_route`` (no libraries needed), then ``to_networkx``,
+then the drawings. Look at your PNGs in ``demonstration/output/``: tests
+only check that a picture is saved, YOU check that it looks right.
+
+    python -m unittest test_case.test_member4_visualization -v
 """
 
 from __future__ import annotations
@@ -41,24 +49,25 @@ ALGORITHM_COLORS = {"Dijkstra": ROUTE_COLOR, "A*": ALT_COLOR}
 
 
 def format_route(result: PathResult, unit: str = "km") -> str:
-    label = f"[{result.algorithm}] " if result.algorithm else ""
-    if not result.found:
-        return f"{label}No route found (visited {result.nodes_visited} locations)"
-    return (f"{label}{' -> '.join(result.path)}\n"
-            f"    distance: {result.distance:.1f} {unit} | stops: {len(result.path)} | "
-            f"locations visited: {result.nodes_visited}")
+    # Expected output for a found route:
+    #   [Dijkstra] Home -> School -> Library -> Hospital -> Airport
+    #       distance: 13.1 km | stops: 5 | locations visited: 10
+    # TODO 1: label = "[<algorithm>] " if result.algorithm else ""
+    # TODO 2: if not result.found:
+    #             return f"{label}No route found (visited N locations)"
+    # TODO 3: otherwise join the path with " -> " and add a second line with
+    #         the distance (1 decimal + unit), number of stops, locations visited
+    raise NotImplementedError
 
 
 def to_networkx(graph: Graph):
     import networkx as nx
 
-    nx_graph = nx.DiGraph() if graph.directed else nx.Graph()
-    for name in graph.locations:
-        loc = graph.location(name)
-        nx_graph.add_node(name, pos=(loc.x, loc.y))
-    for a, b, weight in graph.roads():
-        nx_graph.add_edge(a, b, weight=weight)
-    return nx_graph
+    # TODO 1: nx_graph = nx.DiGraph() if graph.directed else nx.Graph()
+    # TODO 2: for every location: nx_graph.add_node(name, pos=(x, y))
+    # TODO 3: for every road (a, b, weight): nx_graph.add_edge(a, b, weight=weight)
+    # TODO 4: return nx_graph
+    raise NotImplementedError
 
 
 def _style_axes(ax) -> None:
@@ -72,75 +81,41 @@ def draw_map(graph: Graph, path: Sequence[str] | None = None, title: str = "Rout
     """Draw every location and road; highlight ``path`` and dashed ``blocked`` roads."""
     import matplotlib.pyplot as plt
     import networkx as nx
-
-    nx_graph = to_networkx(graph)
-    pos = nx.get_node_attributes(nx_graph, "pos")
-    fig = ax.figure if ax is not None else plt.figure(figsize=(9, 6))
-    ax = ax or fig.add_subplot()
-
-    nx.draw_networkx_edges(nx_graph, pos, ax=ax, edge_color=ROAD_COLOR, width=2)
-
-    blocked = list(blocked)
-    if blocked:
-        nx.draw_networkx_edges(nx.Graph(blocked), pos, ax=ax, edge_color=BLOCKED_COLOR,
-                               width=2, style="dashed")
-    if path and len(path) > 1:
-        route_edges = list(zip(path, path[1:]))
-        nx.draw_networkx_edges(nx_graph, pos, edgelist=route_edges, ax=ax,
-                               edge_color=path_color, width=4)
-
-    if show_weights:
-        labels = {(a, b): f"{w:g}" for a, b, w in nx_graph.edges(data="weight")}
-        nx.draw_networkx_edge_labels(nx_graph, pos, edge_labels=labels, ax=ax, font_size=8,
-                                     font_color=MUTED_TEXT, rotate=False,
-                                     bbox={"facecolor": "white", "edgecolor": "none", "pad": 1})
-
-    on_path = set(path or [])
-    nx.draw_networkx_nodes(nx_graph, pos, ax=ax, node_size=320, edgecolors="white", linewidths=2,
-                           node_color=[path_color if n in on_path else NODE_COLOR for n in nx_graph])
-    label_pos = {n: (x, y + 0.32) for n, (x, y) in pos.items()}
-    nx.draw_networkx_labels(nx_graph, label_pos, ax=ax, font_size=9, font_color=TEXT_COLOR)
-
-    # Legend so identity never relies on color alone.
     from matplotlib.lines import Line2D
-    handles = [Line2D([], [], color=ROAD_COLOR, lw=2, label="Road")]
-    if path:
-        handles.append(Line2D([], [], color=path_color, lw=4, label="Route"))
-    if blocked:
-        handles.append(Line2D([], [], color=BLOCKED_COLOR, lw=2, ls="--", label="Blocked road"))
-    ax.legend(handles=handles, loc="lower right", frameon=False)
-    ax.set_title(title, color=TEXT_COLOR, loc="left")
-    _style_axes(ax)
-    fig.tight_layout()
-    return fig
+
+    # Draw in LAYERS - later layers are drawn on top of earlier ones.
+    # TODO 1: nx_graph = to_networkx(graph); pos = nx.get_node_attributes(nx_graph, "pos")
+    # TODO 2: fig = ax.figure if ax is given, else plt.figure(figsize=(9, 6));
+    #         ax = ax or fig.add_subplot()
+    # TODO 3: all roads in ROAD_COLOR:   nx.draw_networkx_edges(nx_graph, pos, ax=ax, ...)
+    # TODO 4: blocked roads, red + dashed: draw_networkx_edges(nx.Graph(list(blocked)),
+    #         pos, ..., style="dashed")
+    # TODO 5: the route: edgelist=list(zip(path, path[1:])), thicker line, path_color
+    # TODO 6: if show_weights: nx.draw_networkx_edge_labels(...) with a white bbox
+    #         so the numbers stay readable on top of the route
+    # TODO 7: nodes: nx.draw_networkx_nodes(...) - path_color for places on the
+    #         route, NODE_COLOR for the rest
+    # TODO 8: place names slightly above each node: nx.draw_networkx_labels(...)
+    # TODO 9: a legend built from Line2D handles (Road / Route / Blocked road),
+    #         ax.set_title(title), _style_axes(ax), fig.tight_layout()
+    # TODO 10: return fig
+    raise NotImplementedError
 
 
 def plot_performance(rows: Sequence[ComparisonRow], title: str = "Dijkstra vs A*") -> Figure:
     """Two small multiples: average time and locations visited, per route."""
     import matplotlib.pyplot as plt
 
-    routes = list(dict.fromkeys(f"{r.start} → {r.goal}" for r in rows))
-    algorithms = list(dict.fromkeys(r.algorithm for r in rows))
-    fig, axes = plt.subplots(1, 2, figsize=(11, 4.5))
-    width = 0.8 / len(algorithms)
-
-    for ax, metric, label in ((axes[0], "avg_ms", "Average time (ms)"),
-                              (axes[1], "nodes_visited", "Locations visited")):
-        for i, algorithm in enumerate(algorithms):
-            values = [getattr(r, metric) for r in rows if r.algorithm == algorithm]
-            xs = [x + (i - (len(algorithms) - 1) / 2) * width for x in range(len(routes))]
-            ax.bar(xs, values, width * 0.92, label=algorithm,
-                   color=ALGORITHM_COLORS.get(algorithm, NODE_COLOR))
-        ax.set_xticks(range(len(routes)), routes, rotation=20, ha="right", fontsize=8)
-        ax.set_title(label, color=TEXT_COLOR, loc="left")
-        ax.grid(axis="y", color="#e5e4df", linewidth=0.8)
-        ax.set_axisbelow(True)
-        for side in ("top", "right"):
-            ax.spines[side].set_visible(False)
-        ax.legend(frameon=False)
-    fig.suptitle(title, color=TEXT_COLOR, x=0.01, ha="left")
-    fig.tight_layout()
-    return fig
+    # TODO 1: routes = unique "start → goal" labels in order;
+    #         algorithms = unique algorithm names in order (hint: dict.fromkeys)
+    # TODO 2: fig, axes = plt.subplots(1, 2, figsize=(11, 4.5))
+    # TODO 3: left chart = avg_ms, right chart = nodes_visited.
+    #         Grouped bars: one bar per algorithm for each route, each algorithm
+    #         shifted a little left/right; colors from ALGORITHM_COLORS
+    # TODO 4: route names as x tick labels, a title and a legend on each chart
+    # TODO 5: fig.suptitle(title); fig.tight_layout(); return fig
+    # Never put both measures on one chart with two y-axes - that's why we use two.
+    raise NotImplementedError
 
 
 def save_figure(fig: Figure, path: str | Path) -> Path:
